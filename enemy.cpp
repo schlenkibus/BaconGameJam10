@@ -16,7 +16,7 @@ Enemy::~Enemy()
 void Enemy::update(sf::Time deltaTime)
 {
   //Logic
-  
+
 }
 
 void Enemy::render(sf::RenderWindow& window)
@@ -26,7 +26,7 @@ void Enemy::render(sf::RenderWindow& window)
 
 void Enemy::setWayPoint(sf::Vector2f pos)
 {
-  waypoints.emplace_back(pos);
+  waypoint = pos;
 }
 
 AnimatedSprite& Enemy::getSprite()

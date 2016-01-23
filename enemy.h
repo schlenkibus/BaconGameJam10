@@ -12,7 +12,7 @@ public:
   Animation idle;
   float health;
   Resources enemyResources;
-  std::vector<sf::Vector2f> waypoints;
+  sf::Vector2f waypoint;
   Enemy();
   ~Enemy();
   void update(sf::Time deltaTime);
