@@ -103,7 +103,6 @@ bool PhysicsComponent::checkOnPlatform()
   if(newPos.x >= l1p1.x && newPos.x <= l1p1.x + 85
       && newPos.y >= 620 && newPos.y <= 650)
   {
-    std::cout << newPos.y << std::endl;
     velocity.y = 0;
     inAir = false;
     return true;
@@ -111,7 +110,6 @@ bool PhysicsComponent::checkOnPlatform()
   else if(newPos.x >= l1p2.x && newPos.x <= l1p2.x + 173
       && newPos.y >= 470 && newPos.y <= 500)
   {
-    std::cout << newPos.y << std::endl;
     velocity.y = 0;
     inAir = false;
     return true;
@@ -119,7 +117,6 @@ bool PhysicsComponent::checkOnPlatform()
   else if(newPos.x >= l1p3.x && newPos.x <= l1p3.x + 173
       && newPos.y >= 320 && newPos.y <= 350)
   {
-    std::cout << newPos.y << std::endl;
     velocity.y = 0;
     inAir = false;
     return true;
@@ -127,7 +124,6 @@ bool PhysicsComponent::checkOnPlatform()
   else if(newPos.x >= l1p4.x && newPos.x <= l1p4.x + 85
       && newPos.y >= 180 && newPos.y <= 200)
   {
-    std::cout << newPos.y << std::endl;
     velocity.y = 0;
     inAir = false;
     return true;

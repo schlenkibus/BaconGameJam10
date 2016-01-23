@@ -4,6 +4,7 @@
 #include "Animation.h"
 #include "flyingBook.h"
 #include <fstream>
+#include "door.h"
 
 #pragma once
 
@@ -15,6 +16,7 @@ private:
   Resources libraryRS;
   sf::Sprite backG;
   sf::Sprite Floor;
+  Door door;
   sf::Sprite platform1, platform2, platform3, platform4;
   flyingBook enemy1, enemy2, enemy3;
   std::fstream levelData;

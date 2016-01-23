@@ -13,6 +13,8 @@ libaryLevel::libaryLevel()
   platform3.setPosition(temp3);
   platform4.setPosition(temp4);
 
+  door.setPosition(sf::Vector2f(950, 525));
+
   libraryRS.loadFromFileAndStore("/backgrounds/blackWall.png", "libBack", "textures");
   libraryRS.loadFromFileAndStore("/platforms/platform2x1.png", "floorTile", "textures");
   libraryRS.loadFromFileAndStore("/platforms/platform1x1.png", "platform1x1", "textures");
@@ -35,6 +37,7 @@ void libaryLevel::update(sf::Time deltaTime)
   enemy1.update(deltaTime);
   enemy2.update(deltaTime);
   enemy3.update(deltaTime);
+  door.update(deltaTime);
 }
 
 void libaryLevel::draw(sf::RenderWindow &window)
@@ -45,6 +48,8 @@ void libaryLevel::draw(sf::RenderWindow &window)
   window.draw(platform2);
   window.draw(platform3);
   window.draw(platform4);
+  window.draw(door.getSprite());
+  window.draw(door.getTriggerSprite());
   window.draw(enemy1.getSprite());
   window.draw(enemy2.getSprite());
   window.draw(enemy3.getSprite());

@@ -6,7 +6,7 @@ flyingBook::flyingBook() : Enemy()
   idle.setSpriteSheet(enemyResources.getTextureFromMap("book_idle"));
   idle.addFrame(sf::IntRect(0, 0, 112, 80));
   sprite.setAnimation(idle);
-  sprite.setPosition(rand() % 400 + 500, rand() % 100 + 500);
+  sprite.setPosition(rand() % 400 + 300, rand() % 100 + 550);
   direction.x = 0; direction.y = 0;
   addWaypoint();
 }
