@@ -4,6 +4,7 @@
 #include "resources.h"
 #include "player.h"
 #include <iostream>
+#include "flyingBook.h"
 
 #pragma once
 
@@ -11,6 +12,7 @@ class Game
 {
 private:
   Player player;
+  flyingBook enemy1;
   enum gameState {ingame, dead, clear, pause};
   Animation * testAnim;
   AnimatedSprite * testPlayer;
