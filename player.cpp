@@ -4,7 +4,7 @@ Player::Player()
 {
 
   pos.x = 100;
-  pos.y = 565;
+  pos.y = 700;
   playerResource.loadFromFileAndStore(std::string("wand1.png"),
                                         std::string("player_idle"),
                                         std::string("textures"));
@@ -13,7 +13,7 @@ Player::Player()
   //idleAnim.addFrame(sf::IntRect(100, 0, 100, 200));
   playerRender.setAnimation(idleAnim);
   playerRender.setFrameTime(sf::seconds(0.3f));
-
+  playerRender.setOrigin(17.5f, 135);
   physCom.setPosition(pos);
 }
 

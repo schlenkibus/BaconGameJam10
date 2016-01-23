@@ -11,12 +11,13 @@ Game::~Game()
 
 void Game::update()
 {
-  player.update(gameTimer.restart());
-  enemy1.update(gameTimer.restart());
+  sf::Time temp = gameTimer.restart();
+  level1.update(temp);
+  player.update(temp);
 }
 
 void Game::render(sf::RenderWindow& window)
 {
+  level1.draw(window);
   window.draw(player.getSprite());
-  window.draw(enemy1.getSprite());
 }

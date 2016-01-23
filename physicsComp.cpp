@@ -13,12 +13,16 @@ PhysicsComponent::PhysicsComponent()
   settings >> speed >> acc >> negative_acc >> grav >> jumpHeight;
   settings.close();
   inAir = false;
+
+  loadLevelData();
 }
 
 PhysicsComponent::~PhysicsComponent()
 {
   if(settings.is_open())
     settings.close();
+  if(level1.is_open())
+    level1.close();
 }
 
 sf::Vector2f PhysicsComponent::update(sf::Time deltaTime)
@@ -55,20 +59,15 @@ sf::Vector2f PhysicsComponent::update(sf::Time deltaTime)
     }
   }
   //Y-Axis
+
+  if(checkOnPlatform() == true)
+  {
+    inAir = false;
+  }
   if(!inAir && sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
   {
     velocity.y -= jumpHeight;
     inAir = true;
-  }
-  else if(newPos.y + velocity.y + grav + 135 <= 700)
-  {
-    velocity.y += grav;
-    inAir = true;
-  }
-  else
-  {
-    velocity.y = 0;
-    inAir = false;
   }
 
   if(inAir)
@@ -96,4 +95,61 @@ void PhysicsComponent::setPosition(sf::Vector2f pos)
 sf::Vector2f PhysicsComponent::getPos()
 {
   return newPos;
+}
+
+bool PhysicsComponent::checkOnPlatform()
+{
+
+  if(newPos.x >= l1p1.x && newPos.x <= l1p1.x + 85
+      && newPos.y >= 620 && newPos.y <= 650)
+  {
+    std::cout << newPos.y << std::endl;
+    velocity.y = 0;
+    inAir = false;
+    return true;
+  }
+  else if(newPos.x >= l1p2.x && newPos.x <= l1p2.x + 173
+      && newPos.y >= 470 && newPos.y <= 500)
+  {
+    std::cout << newPos.y << std::endl;
+    velocity.y = 0;
+    inAir = false;
+    return true;
+  }
+  else if(newPos.x >= l1p3.x && newPos.x <= l1p3.x + 173
+      && newPos.y >= 320 && newPos.y <= 350)
+  {
+    std::cout << newPos.y << std::endl;
+    velocity.y = 0;
+    inAir = false;
+    return true;
+  }
+  else if(newPos.x >= l1p4.x && newPos.x <= l1p4.x + 85
+      && newPos.y >= 180 && newPos.y <= 200)
+  {
+    std::cout << newPos.y << std::endl;
+    velocity.y = 0;
+    inAir = false;
+    return true;
+  }
+  else if(newPos.y + velocity.y + grav >= 700)
+  {
+    velocity.y = 0;
+    inAir = false;
+    return true;
+  }
+  else
+  {
+    velocity.y += grav;
+    inAir = true;
+    return false;
+  }
+}
+
+void PhysicsComponent::loadLevelData()
+{
+  level1.open("json/level1.json", std::fstream::in);
+  std::string line;
+  level1 >> l1p1.x >> l1p1.y >> l1p2.x >> l1p2.y >> l1p3.x >> l1p3.y  >> l1p4.x >> l1p4.y;
+  level1.close();
 }

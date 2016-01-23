@@ -6,7 +6,7 @@ flyingBook::flyingBook() : Enemy()
   idle.setSpriteSheet(enemyResources.getTextureFromMap("book_idle"));
   idle.addFrame(sf::IntRect(0, 0, 112, 80));
   sprite.setAnimation(idle);
-  sprite.setPosition(300, 400);
+  sprite.setPosition(rand() % 400 + 500, rand() % 100 + 500);
   direction.x = 0; direction.y = 0;
   addWaypoint();
 }
@@ -40,6 +40,4 @@ void flyingBook::update(sf::Time deltaTime)
     if(sprite.getGlobalBounds().left <= 20 || sprite.getGlobalBounds().left >= 900
       || sprite.getGlobalBounds().top <= 300 || sprite.getGlobalBounds().top >= 600)
       addWaypoint();
-
-      std::cout << sprite.getGlobalBounds().left << std::endl;
 }
