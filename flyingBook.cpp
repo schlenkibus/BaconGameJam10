@@ -8,7 +8,7 @@ flyingBook::flyingBook() : Enemy()
   sprite.setAnimation(idle);
   sprite.setPosition(300, 400);
   direction.x = 0; direction.y = 0;
-  addWaypoint(sf::Vector2f(100, 500));
+  addWaypoint();
 }
 
 flyingBook::~flyingBook()
@@ -16,23 +16,30 @@ flyingBook::~flyingBook()
 
 }
 
-void flyingBook::addWaypoint(sf::Vector2f pos)
+void flyingBook::addWaypoint()
 {
-  waypoint = pos;
-  direction = interpolate(sf::Vector2f(pos.x, sprite.getGlobalBounds().left),
-                          sf::Vector2f(pos.y, sprite.getGlobalBounds().top),
-                          1.0f);
+  if(sprite.getGlobalBounds().left <= 500)
+  {
+    waypoint = sf::Vector2f(rand() % 50 + 900, rand() % 100 + 500);
+  }
+  else
+  {
+    waypoint = sf::Vector2f(rand() % 50 + 100, rand() % 90 + 550);
+  }
+
+  direction = normalize(waypoint, sprite.getPosition());
 }
 
 void flyingBook::update(sf::Time deltaTime)
 {
     //Waypoint system
     sprite.update(deltaTime);
-    sprite.move(direction.x * 0.01f, direction.y * 0.01f);
-    direction = interpolate(sf::Vector2f(waypoint.x, sprite.getGlobalBounds().left),
-                            sf::Vector2f(waypoint.y, sprite.getGlobalBounds().top),
-                            2.0f);
-    if(sprite.getGlobalBounds().left <= 10 || sprite.getGlobalBounds().left >= 990
+
+    sprite.move(direction * 0.003f);
+
+    if(sprite.getGlobalBounds().left <= 20 || sprite.getGlobalBounds().left >= 900
       || sprite.getGlobalBounds().top <= 300 || sprite.getGlobalBounds().top >= 600)
-      addWaypoint(sf::Vector2f(800, rand() % 100 + 500));
+      addWaypoint();
+
+      std::cout << sprite.getGlobalBounds().left << std::endl;
 }

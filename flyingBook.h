@@ -1,5 +1,6 @@
 #include "enemy.h"
 #include <stdlib.h>
+#include <iostream>
 
 #pragma once
 
@@ -11,5 +12,5 @@ public:
   flyingBook();
   ~flyingBook();
   void update(sf::Time deltaTime);
-  void addWaypoint(sf::Vector2f pos);
+  void addWaypoint();
 };
