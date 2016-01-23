@@ -4,7 +4,7 @@
 
 int main ()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML", sf::Style::Close);
+	sf::RenderWindow window(sf::VideoMode(1000, 750), "SFML", sf::Style::Close);
 	sf::Event event;
 
 	App app(window);

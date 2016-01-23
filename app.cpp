@@ -1,34 +1,48 @@
 #include "app.h"
-#include <iostream>
 
 App::App(sf::RenderWindow &window)
 {
+	accumulator = sf::Time::Zero;
+	ups = sf::seconds(1.f / 60.f);
 	m_window = &window;
 	currentState = App::splash;
 	menuClock.restart();
+	font.loadFromFile("fonts/Aaargh/Aaargh.ttf");
 }
 
 void App::update()
 {
-	m_window->clear();
-	switch(currentState)
+	while(accumulator > ups)
 	{
-		case App::splash:
-			if(menuClock.getElapsedTime().asSeconds() >= 3.f)
-			{
-				currentState = App::menu;
-				menuClock.restart();
-			}
-			splashScreen.draw(*m_window);
-		break;
-		case App::menu:
-			mainMenu.draw(*m_window);
-		break;
-		case App::game:
-		break;
-		default:
-			currentState = App::splash;
-		break;
+		accumulator -= ups;
+		switch(currentState)
+		{
+			case App::splash:
+				if(menuClock.getElapsedTime().asSeconds() >= 1.f)
+				{
+					currentState = App::game;
+					menuClock.restart();
+				}
+			break;
+			case App::menu:
+				//Menu
+			break;
+			case App::game:
+				gameG.update();
+			break;
+			default:
+				currentState = App::splash;
+			break;
+		}
 	}
+
+	m_window->clear();
+	if(currentState == App::splash)
+		splashScreen.draw(*m_window);
+	else if(currentState == App::menu)
+		mainMenu.draw(*m_window);
+	else if(currentState == App::game)
+		gameG.render(*m_window);
 	m_window->display();
+	accumulator += clockLogic.restart();
 }
