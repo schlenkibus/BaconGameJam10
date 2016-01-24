@@ -6,27 +6,18 @@
 #include "Animation.h"
 #include <fstream>
 #include "player.h"
-#include "spiderWeb.h"
-#include "bossKnife.h"
-#include "pot.h"
+#include "endTrigger.h"
 
-class kitchen
+class prison
 {
 private:
   Player * p_player;
 
   Resources rs;
   sf::Sprite backG, Floor;
-
-  bossKnife boss;
-
-  WebPickup pickup1, pickup2, pickup3;
-
-  sf::Sprite platform1, platform2, platform3;
-  Pot enemy1, enemy2, enemy3;
-  std::fstream levelData;
+  wizzard wiz;
 public:
-  kitchen();
+  prison();
   void update(sf::Time deltaTime);
   void draw(sf::RenderWindow &window);
   void setPlayerPointer(Player& p);

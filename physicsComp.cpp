@@ -13,7 +13,7 @@ PhysicsComponent::PhysicsComponent()
   settings >> speed >> acc >> negative_acc >> grav >> jumpHeight;
   settings.close();
   inAir = false;
-
+  currentLevel = 1;
   loadLevelData();
 }
 
@@ -27,6 +27,14 @@ PhysicsComponent::~PhysicsComponent()
 
 sf::Vector2f PhysicsComponent::update(sf::Time deltaTime)
 {
+  //LVL 3 SCRIPT
+  if(currentLevel == 3)
+  {
+    newPos.y = 650;
+    newPos.x += 2.2f;
+    return newPos;
+  }
+
     ///////// Movement
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && !moving)
   {
@@ -99,46 +107,85 @@ sf::Vector2f PhysicsComponent::getPos()
 
 bool PhysicsComponent::checkOnPlatform()
 {
-  //Lee
-  if(newPos.x >= l1p1.x && newPos.x <= l1p1.x + 85
-      && newPos.y >= 620 && newPos.y <= 650)
+  //Level1
+  if(currentLevel == 1)
   {
-    velocity.y = 0;
-    inAir = false;
-    return true;
+    if(newPos.x >= l1p1.x && newPos.x <= l1p1.x + 85
+        && newPos.y >= 620 && newPos.y <= 650)
+    {
+      velocity.y = 0;
+      inAir = false;
+      return true;
+    }
+    else if(newPos.x >= l1p2.x && newPos.x <= l1p2.x + 173
+        && newPos.y >= 470 && newPos.y <= 500)
+    {
+      velocity.y = 0;
+      inAir = false;
+      return true;
+    }
+    else if(newPos.x >= l1p3.x && newPos.x <= l1p3.x + 173
+        && newPos.y >= 320 && newPos.y <= 350)
+    {
+      velocity.y = 0;
+      inAir = false;
+      return true;
+    }
+    else if(newPos.x >= l1p4.x && newPos.x <= l1p4.x + 85
+        && newPos.y >= 180 && newPos.y <= 200)
+    {
+      velocity.y = 0;
+      inAir = false;
+      return true;
+    }
+    else if(newPos.y + velocity.y + grav >= 700)
+    {
+      velocity.y = 0;
+      inAir = false;
+      return true;
+    }
+    else
+    {
+      velocity.y += grav;
+      inAir = true;
+      return false;
+    }
   }
-  else if(newPos.x >= l1p2.x && newPos.x <= l1p2.x + 173
-      && newPos.y >= 470 && newPos.y <= 500)
+  else if(currentLevel == 2)
   {
-    velocity.y = 0;
-    inAir = false;
-    return true;
-  }
-  else if(newPos.x >= l1p3.x && newPos.x <= l1p3.x + 173
-      && newPos.y >= 320 && newPos.y <= 350)
-  {
-    velocity.y = 0;
-    inAir = false;
-    return true;
-  }
-  else if(newPos.x >= l1p4.x && newPos.x <= l1p4.x + 85
-      && newPos.y >= 180 && newPos.y <= 200)
-  {
-    velocity.y = 0;
-    inAir = false;
-    return true;
-  }
-  else if(newPos.y + velocity.y + grav >= 700)
-  {
-    velocity.y = 0;
-    inAir = false;
-    return true;
-  }
-  else
-  {
-    velocity.y += grav;
-    inAir = true;
-    return false;
+    if(newPos.x >= l2p1.x && newPos.x <= l2p1.x + 85
+        && newPos.y >= 120 && newPos.y <= 140)
+    {
+      velocity.y = 0;
+      inAir = false;
+      return true;
+    }
+    else if(newPos.x >= l2p2.x && newPos.x <= l2p2.x + 173
+        && newPos.y >= 280 && newPos.y <= 300)
+    {
+      velocity.y = 0;
+      inAir = false;
+      return true;
+    }
+    else if(newPos.x >= l2p3.x && newPos.x <= l2p3.x + 173
+        && newPos.y >= 480 && newPos.y <= 500)
+    {
+      velocity.y = 0;
+      inAir = false;
+      return true;
+    }
+    else if(newPos.y + velocity.y + grav >= 700)
+    {
+      velocity.y = 0;
+      inAir = false;
+      return true;
+    }
+    else
+    {
+      velocity.y += grav;
+      inAir = true;
+      return false;
+    }
   }
 }
 
@@ -147,9 +194,12 @@ bool PhysicsComponent::checkOnPlatform()
 void PhysicsComponent::loadLevelData()
 {
   level1.open("json/level1.json", std::fstream::in);
-  std::string line;
   level1 >> l1p1.x >> l1p1.y >> l1p2.x >> l1p2.y >> l1p3.x >> l1p3.y  >> l1p4.x >> l1p4.y;
   level1.close();
+
+  level2.open("json/level2.json", std::fstream::in);
+  level2 >> l2p1.x >> l2p1.y >> l2p2.x >> l2p2.y >> l2p3.x >> l2p3.y;
+  level2.close();
 }
 
 bool PhysicsComponent::isMoving()
@@ -160,4 +210,9 @@ bool PhysicsComponent::isMoving()
 float PhysicsComponent::getVelo()
 {
   return velocity.x;
+}
+
+void PhysicsComponent::setCurrentLevel(int i)
+{
+  currentLevel = i;
 }

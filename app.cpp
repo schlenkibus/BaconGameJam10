@@ -18,7 +18,7 @@ void App::update()
 		switch(currentState)
 		{
 			case App::splash:
-				if(menuClock.getElapsedTime().asSeconds() >= 0.2f)
+				if(menuClock.getElapsedTime().asSeconds() >= 2.f && sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 				{
 					currentState = App::game;
 					menuClock.restart();
@@ -30,6 +30,8 @@ void App::update()
 			case App::game:
 				gameG.update();
 			break;
+			case App::outro:
+
 			default:
 				currentState = App::splash;
 			break;

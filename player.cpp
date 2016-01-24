@@ -170,7 +170,7 @@ AnimatedSprite& Player::getSprite()
 
 sf::Vector2f Player::getPos()
 {
-  return pos;
+  return physCom.getPos();
 }
 
 void Player::kill()
@@ -253,4 +253,15 @@ bool Player::isActionPlaying()
 sf::Sprite& Player::getProjectile()
 {
   return projectile;
+}
+
+PhysicsComponent& Player::getPhysCom()
+{
+  return physCom;
+}
+
+void Player::setPosition(sf::Vector2f nP)
+{
+  playerRender.setPosition(nP);
+  //pos = nP;
 }

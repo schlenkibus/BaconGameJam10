@@ -13,7 +13,8 @@
 class App
 {
 public:
-	enum gameState {splash, menu, game};
+	enum gameState {splash, menu, game, outro};
+	
 private:
 	//FPS
 	sf::Text fpstext;

@@ -5,7 +5,6 @@
 #include "flyingBook.h"
 #include <fstream>
 #include "player.h"
-#include "spiderWeb.h"
 #include "fire.h"
 #include "bossBook.h"
 
@@ -22,7 +21,6 @@ private:
 
   bossBook boss;
 
-  WebPickup pickup1, pickup2, pickup3;
   pickupFire fire1, fire2, fire3;
 
   sf::FloatRect eFR1, eFR2, eFR3, t1, t2, t3;

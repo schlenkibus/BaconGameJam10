@@ -39,6 +39,8 @@ private:
 
   void setAction();
 public:
+  int currentLevel;
+
   PhysicsComponent physCom;
   Player();
   ~Player();
@@ -61,4 +63,5 @@ public:
   bool isShot();
   void destroyProjectile();
   bool isFlame;
+  PhysicsComponent& getPhysCom();
 };
