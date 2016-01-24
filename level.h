@@ -5,6 +5,8 @@
 #include "flyingBook.h"
 #include <fstream>
 #include "door.h"
+#include "key.h"
+#include "player.h"
 
 #pragma once
 
@@ -13,6 +15,7 @@
 class libaryLevel //To be added: Doors, Platforms, Key etc.
 {
 private:
+  Player * p_player;
   Resources libraryRS;
   sf::Sprite backG;
   sf::Sprite Floor;
@@ -20,23 +23,10 @@ private:
   sf::Sprite platform1, platform2, platform3, platform4;
   flyingBook enemy1, enemy2, enemy3;
   std::fstream levelData;
+  Key key;
 public:
   libaryLevel();
   void update(sf::Time deltaTime);
   void draw(sf::RenderWindow& window);
-};
-
-class kitchen
-{
-
-};
-
-class cellar
-{
-
-};
-
-class prison
-{
-
+  void setPlayerPointer(Player& p);
 };

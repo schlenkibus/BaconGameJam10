@@ -16,6 +16,11 @@ flyingBook::~flyingBook()
 
 }
 
+void flyingBook::kill()
+{
+  dead = true;
+}
+
 void flyingBook::addWaypoint()
 {
   if(sprite.getGlobalBounds().left <= 500)
@@ -26,12 +31,13 @@ void flyingBook::addWaypoint()
   {
     waypoint = sf::Vector2f(rand() % 50 + 100, rand() % 90 + 550);
   }
-
   direction = normalize(waypoint, sprite.getPosition());
 }
 
 void flyingBook::update(sf::Time deltaTime)
 {
+  if(!dead)
+  {
     //Waypoint system
     sprite.update(deltaTime);
 
@@ -40,4 +46,16 @@ void flyingBook::update(sf::Time deltaTime)
     if(sprite.getGlobalBounds().left <= 20 || sprite.getGlobalBounds().left >= 900
       || sprite.getGlobalBounds().top <= 300 || sprite.getGlobalBounds().top >= 600)
       addWaypoint();
+    }
+    else
+    {
+      sprite.update(deltaTime);
+      if(sprite.getGlobalBounds().top <= 700)
+        sprite.move(0, 1);
+    }
+}
+
+sf::Vector2f flyingBook::getPos()
+{
+  return sprite.getPosition();
 }

@@ -99,7 +99,7 @@ sf::Vector2f PhysicsComponent::getPos()
 
 bool PhysicsComponent::checkOnPlatform()
 {
-
+  //Lee
   if(newPos.x >= l1p1.x && newPos.x <= l1p1.x + 85
       && newPos.y >= 620 && newPos.y <= 650)
   {
@@ -141,6 +141,8 @@ bool PhysicsComponent::checkOnPlatform()
     return false;
   }
 }
+
+
 
 void PhysicsComponent::loadLevelData()
 {

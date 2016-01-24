@@ -2,6 +2,7 @@
 
 Game::Game()
 {
+  level1.setPlayerPointer(player);
 }
 
 Game::~Game()
@@ -20,4 +21,5 @@ void Game::render(sf::RenderWindow& window)
 {
   level1.draw(window);
   window.draw(player.getSprite());
+  window.draw(player.getHud());
 }

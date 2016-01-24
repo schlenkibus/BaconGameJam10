@@ -13,6 +13,8 @@ libaryLevel::libaryLevel()
   platform3.setPosition(temp3);
   platform4.setPosition(temp4);
 
+  key.setPosition(sf::Vector2f(100, 200));
+
   door.setPosition(sf::Vector2f(950, 525));
 
   libraryRS.loadFromFileAndStore("/backgrounds/blackWall.png", "libBack", "textures");
@@ -38,6 +40,23 @@ void libaryLevel::update(sf::Time deltaTime)
   enemy2.update(deltaTime);
   enemy3.update(deltaTime);
   door.update(deltaTime);
+
+  //Collisons!
+  if(p_player->getSprite().getGlobalBounds().intersects(enemy1.getSprite().getGlobalBounds())
+  || p_player->getSprite().getGlobalBounds().intersects(enemy2.getSprite().getGlobalBounds())
+  || p_player->getSprite().getGlobalBounds().intersects(enemy3.getSprite().getGlobalBounds()))
+  {
+    if(p_player->getLife() <= 0)
+      p_player->kill();
+    if(p_player->canGetDamage())
+      p_player->setLife(p_player->getLife() - 10);
+  }
+
+  if(p_player->getSprite().getGlobalBounds().intersects(key.getSprite().getGlobalBounds()))
+  {
+    key.getSprite().setPosition(-200.f, -200.f);
+    p_player->pickupKey();
+  }
 }
 
 void libaryLevel::draw(sf::RenderWindow &window)
@@ -48,9 +67,15 @@ void libaryLevel::draw(sf::RenderWindow &window)
   window.draw(platform2);
   window.draw(platform3);
   window.draw(platform4);
+  window.draw(key.getSprite());
   window.draw(door.getSprite());
   window.draw(door.getTriggerSprite());
   window.draw(enemy1.getSprite());
   window.draw(enemy2.getSprite());
   window.draw(enemy3.getSprite());
+}
+
+void libaryLevel::setPlayerPointer(Player &p)
+{
+  p_player = &p;
 }
