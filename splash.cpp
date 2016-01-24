@@ -2,7 +2,7 @@
 
 Splash::Splash()
 {
-	rs.loadFromFileAndStore("splash.png", "splash", "textures");
+	rs.loadFromFileAndStore("splashscreen.png", "splash", "textures");
 	sprite.setTexture(rs.getTextureFromMap("splash"));
 }
 

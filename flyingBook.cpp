@@ -2,10 +2,17 @@
 
 flyingBook::flyingBook() : Enemy()
 {
+  enemyResources.loadFromFileAndStore("bookL.png", "book_left", "textures");
+  enemyResources.loadFromFileAndStore("bookR.png", "book_right", "textures");
   enemyResources.loadFromFileAndStore("book.png", "book_idle", "textures");
+  left.setSpriteSheet(enemyResources.getTextureFromMap("book_left"));
+  right.setSpriteSheet(enemyResources.getTextureFromMap("book_right"));
   idle.setSpriteSheet(enemyResources.getTextureFromMap("book_idle"));
   idle.addFrame(sf::IntRect(0, 0, 112, 80));
-  sprite.setAnimation(idle);
+  left.addFrame(sf::IntRect(5, 21, 94, 57));
+  left.addFrame(sf::IntRect(111, 21, 68, 59));
+  left.addFrame(sf::IntRect(196, 21, 54, 58));
+  sprite.setAnimation(left);
   sprite.setPosition(rand() % 400 + 300, rand() % 100 + 550);
   direction.x = 0; direction.y = 0;
   addWaypoint();
@@ -19,6 +26,7 @@ flyingBook::~flyingBook()
 void flyingBook::kill()
 {
   dead = true;
+  sprite.setAnimation(idle);
 }
 
 void flyingBook::addWaypoint()

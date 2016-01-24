@@ -24,4 +24,6 @@ public:
   void setOnGroundFlag(bool onGround);
   void setPosition(sf::Vector2f pos);
   bool checkOnPlatform();
+  bool isMoving();
+  float getVelo();
 };

@@ -20,6 +20,9 @@ void Game::update()
 void Game::render(sf::RenderWindow& window)
 {
   level1.draw(window);
+  if(player.isShot())
+  {
+    window.draw(player.getProjectile());
+  }
   window.draw(player.getSprite());
-  window.draw(player.getHud());
 }

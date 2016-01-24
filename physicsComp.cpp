@@ -151,3 +151,13 @@ void PhysicsComponent::loadLevelData()
   level1 >> l1p1.x >> l1p1.y >> l1p2.x >> l1p2.y >> l1p3.x >> l1p3.y  >> l1p4.x >> l1p4.y;
   level1.close();
 }
+
+bool PhysicsComponent::isMoving()
+{
+  return moving;
+}
+
+float PhysicsComponent::getVelo()
+{
+  return velocity.x;
+}

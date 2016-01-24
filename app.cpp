@@ -18,7 +18,7 @@ void App::update()
 		switch(currentState)
 		{
 			case App::splash:
-				if(menuClock.getElapsedTime().asSeconds() >= 1.f)
+				if(menuClock.getElapsedTime().asSeconds() >= 0.2f)
 				{
 					currentState = App::game;
 					menuClock.restart();
